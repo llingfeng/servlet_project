@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="resources/js/jquery-3.0.0.js"></script>
+</head>
+<body>
+<button onclick="showTiming()">开始</button>
+<span id="timingCount">00:00:00</span>
+<button onclick="stopTiming()">暂停</button>
+<br>
+<a href="javascript:void (0)" onclick="jumpToTest2()">test2</a>
+<br>
+<input type='text' id='txt1'/>
+<select id='select'>
+    <option value='+'>+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+</select>
+<input type='text' id='txt2'/>
+<input type='button' value=' = ' onclick="count()"/> <!--通过 = 按钮来调用创建的函数，得到结果-->
+<input type='text' id='fruit'/>
+<br>
+<input type="button" value="点击我，打开新窗口"  onclick="openNewWindow()"/>
+</body>
+<script type="text/javascript">
+    var timing = 0;
+    var t;
+
+    function openNewWindow() {
+        var flag = confirm("欢迎来到慕课网");
+        if(flag){
+            this.open("test2.html","_blank","width=600,height=400");
+        }
+    }
+
+    /*$(window).on('beforeunload',function () {
+     return "确认退出？";
+     });*/
+
+    /*window.onbeforeunload = unloadMessage;
+     function unloadMessage(){
+     return "";
+     }*/
+
+    /*$(window).on('load', function(){
+     alert("欢迎你!");
+     });*/
+    var newOpen;
+    var checkNewOpen;
+
+    function jumpToTest2() {
+        newOpen = this.open("test2.html");
+        checkNewOpen = setInterval("updateAfterClose()", 1000);
+    }
+
+    //子窗口关闭时关闭父页面
+    function updateAfterClose() {
+        if (newOpen.closed == true) {
+            clearInterval(checkNewOpen);
+            location.reload();
+        }
+        return false;
+    }
+
+    //显示时间
+    function showTiming() {
+        timing++;
+        var hour = parseInt(timing / (60 * 60));
+        var minute = parseInt((timing - hour * 60 * 60) / 60);
+        var seconds = timing % 60;
+        hour = formatNumber(hour);
+        minute = formatNumber(minute);
+        seconds = formatNumber(seconds);
+        $("#timingCount").html(hour + ":" + minute + ":" + seconds);
+//        t = setTimeout(showTiming, 100);
+    }
+
+    var inter = setInterval("showTiming()", 1000);
+
+    function stopTiming() {
+        clearTimeout(t);
+        clearInterval(inter);
+    }
+
+    function formatNumber(num) {
+        if (num < 10) {
+            return "0" + num;
+        }
+        return num;
+    }
+
+    function choose() {
+        var infos = new Array(
+                ['小A', '女', 21, '大一'], ['小B', '男', 23, '大三'],
+                ['小C', '男', 24, '大四'], ['小D', '女', 21, '大一'],
+                ['小E', '女', 22, '大四'], ['小F', '男', 21, '大一'],
+                ['小G', '女', 22, '大二'], ['小H', '女', 20, '大三'],
+                ['小I', '女', 20, '大一'], ['小J', '男', 20, '大三']
+        );
+
+        //第一次筛选，找出都是大一的信息
+        for (var i = 0; i < infos.length; i++) {
+            if (infos[i][3] == '大一') {
+                switch (infos[i][1]) {
+                    case '女':
+                        document.write(infos[i][0]);
+                        break;
+                }
+            }
+        }
+    }
+
+    function count() {
+        var sum = 0;
+        //获取第一个输入框的值
+        var num1 = document.getElementById("txt1").value - 0;
+        //获取第二个输入框的值
+        var num2 = document.getElementById("txt2").value - 0;
+        //获取选择框的值
+        var sel = document.getElementById("select").value;
+        //获取通过下拉框来选择的值来改变加减乘除的运算法则
+        switch (sel) {
+            case "+":
+                sum = num1 + num2;
+                break;
+            case "-":
+                sum = num1 - num2;
+                break;
+            case "*":
+                sum = num1 * num2;
+                break;
+            case "/":
+                sum = num1 / num2;
+                break;
+        }
+        //设置结果输入框的值
+        document.getElementById("fruit").value = sum;
+    }
+
+</script>
+<script type="text/javascript">
+    //通过javascript的日期对象来得到当前的日期，并输出。
+    var nowDate = new Date();
+    var year = nowDate.getFullYear();
+    var month = nowDate.getMonth()+1;
+    var day = nowDate.getDate();
+    var week = nowDate.getDay();
+    var weekStr = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"];
+    document.write(year+"年"+month+"月"+day+"日--"+weekStr[week-1]);
+
+    //成绩是一长窜的字符串不好处理，找规律后分割放到数组里更好操作哦
+    var scoreStr = "小明:87;小花:81;小红:97;小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76";
+    var arr = scoreStr.split(";");
+
+    //从数组中将成绩撮出来，然后求和取整，并输出。
+    var sum = 0;
+    for(var index in arr){
+        var value = arr[index];
+        if(value.indexOf(":")){
+            sum += value.split(":")[1] - 0;
+        }
+    }
+    document.write(sum/arr.length);
+
+</script>
+</html>
