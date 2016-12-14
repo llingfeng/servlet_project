@@ -29,4 +29,31 @@
         <servlet-name>UnloadServlet</servlet-name>
         <url-pattern>/unloadServlet.do</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SmartUploadServlet</servlet-name>
+        <servlet-class>servlet.SmartUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SmartUploadServlet</servlet-name>
+        <url-pattern>/smartUploadServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>smartDownloadServlet</servlet-name>
+        <servlet-class>servlet.SmartDownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>smartDownloadServlet</servlet-name>
+        <url-pattern>/smartDownloadServlet.do</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>batchDownloadServlet</servlet-name>
+        <servlet-class>servlet.BatchDownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>batchDownloadServlet</servlet-name>
+        <url-pattern>/batchDownloadServlet.do</url-pattern>
+    </servlet-mapping>
 </web-app>

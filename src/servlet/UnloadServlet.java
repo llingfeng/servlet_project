@@ -1,7 +1,6 @@
 package servlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,5 +76,6 @@ public class UnloadServlet extends HttpServlet {
         raf.close();
         randomAccessFile.close();
         tempFile.delete();
+        req.getRequestDispatcher("show.jsp").forward(req,resp);
     }
 }
