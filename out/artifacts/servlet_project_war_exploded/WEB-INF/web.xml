@@ -12,9 +12,22 @@
         <url-pattern>/login.do</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>JumpToFirstPage</servlet-name>
+        <servlet-class>servlet.JumpToFirstPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JumpToFirstPage</servlet-name>
+        <url-pattern>/jumpToFirstPage.do</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>filter.LoginFilter</filter-class>
+        <init-param>
+            <param-name>NoLoginPaths</param-name>
+            <param-value>index.jsp;login.do;error.jsp;.css;.js</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
